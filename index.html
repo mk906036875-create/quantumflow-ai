@@ -1,203 +1,352 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>QuantumFlow AI | Automation Demo</title>
+  <meta name="theme-color" content="#07111f">
+  <meta name="description" content="QuantumFlow AI - AI-powered business automation demo">
+
+  <title>QuantumFlow AI | AI Automation</title>
 
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header class="topbar">
-  <div class="logo">
-    <span>⚡</span> QuantumFlow AI
-  </div>
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <div class="logo">
+      <span>⚡</span>
+      <strong>QuantumFlow AI</strong>
+    </div>
 
-  <div class="status">
-    <span class="dot"></span> Online
-  </div>
-</header>
+    <div class="status">
+      <span class="dot"></span>
+      <span>Online</span>
+    </div>
+  </header>
 
-<main>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="badge">AI AUTOMATION PLATFORM</div>
+  <main>
 
-    <h1>
-      Automate Your Business
-      <span>With AI</span>
-    </h1>
+    <!-- HERO -->
+    <section class="hero">
+
+      <div class="badge">
+        ✦ AI AUTOMATION PLATFORM
+      </div>
+
+      <h1>
+        Automate Your Business
+        <span>With AI</span>
+      </h1>
+
+      <p>
+        Capture leads, score prospects, send follow-ups
+        and update your CRM — automatically.
+      </p>
+
+      <button
+        id="runBtn"
+        class="run-btn"
+        type="button"
+        onclick="runAutomation()">
+        🚀 Run AI Automation
+      </button>
+
+      <div class="hint">
+        <span>Lead</span>
+        <b>→</b>
+        <span>AI Score</span>
+        <b>→</b>
+        <span>Follow-up</span>
+        <b>→</b>
+        <span>CRM</span>
+      </div>
+
+    </section>
+
+
+    <!-- AUTOMATION STATUS -->
+    <section class="panel">
+
+      <div class="panel-title">
+        <div>
+          <small>WORKFLOW</small>
+          <h2>Automation Status</h2>
+        </div>
+
+        <span id="workflowStatus" class="status-badge">
+          Ready
+        </span>
+      </div>
+
+      <div class="progress">
+        <div id="progressBar"></div>
+      </div>
+
+
+      <div id="workflow" class="workflow">
+
+        <!-- STEP 1 -->
+        <div class="step" id="step1">
+
+          <div class="icon">👤</div>
+
+          <div class="step-content">
+            <strong>Lead Capture</strong>
+            <small>Waiting...</small>
+          </div>
+
+          <span class="check">○</span>
+
+        </div>
+
+
+        <div class="line"></div>
+
+
+        <!-- STEP 2 -->
+        <div class="step" id="step2">
+
+          <div class="icon">🧠</div>
+
+          <div class="step-content">
+            <strong>AI Lead Scoring</strong>
+            <small>Waiting...</small>
+          </div>
+
+          <span class="check">○</span>
+
+        </div>
+
+
+        <div class="line"></div>
+
+
+        <!-- STEP 3 -->
+        <div class="step" id="step3">
+
+          <div class="icon">✉️</div>
+
+          <div class="step-content">
+            <strong>AI Follow-up</strong>
+            <small>Waiting...</small>
+          </div>
+
+          <span class="check">○</span>
+
+        </div>
+
+
+        <div class="line"></div>
+
+
+        <!-- STEP 4 -->
+        <div class="step" id="step4">
+
+          <div class="icon">📊</div>
+
+          <div class="step-content">
+            <strong>CRM Update</strong>
+            <small>Waiting...</small>
+          </div>
+
+          <span class="check">○</span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- LATEST LEAD -->
+    <section class="panel">
+
+      <div class="panel-title">
+
+        <div>
+          <small>PROSPECT</small>
+          <h2>Latest Lead</h2>
+        </div>
+
+        <span class="live-label">
+          ● LIVE
+        </span>
+
+      </div>
+
+
+      <div class="lead-card">
+
+        <div class="avatar" id="leadAvatar">
+          JD
+        </div>
+
+
+        <div class="lead-info">
+
+          <h3 id="leadName">
+            Waiting for lead...
+          </h3>
+
+          <p id="leadBusiness">
+            No lead generated
+          </p>
+
+          <span id="leadEmail">
+            —
+          </span>
+
+        </div>
+
+
+        <div class="score">
+
+          <small>AI SCORE</small>
+
+          <strong id="leadScore">
+            --
+          </strong>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- AI FOLLOW-UP -->
+    <section class="panel">
+
+      <div class="panel-title">
+
+        <div>
+          <small>AI GENERATED</small>
+          <h2>AI Follow-up</h2>
+        </div>
+
+        <span>🤖</span>
+
+      </div>
+
+
+      <div id="messageBox" class="message">
+
+        <span>🤖</span>
+
+        <p>
+          AI follow-up message will appear here
+          after automation runs.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- LIVE DASHBOARD -->
+    <section class="dashboard">
+
+      <div class="stat">
+
+        <span>Leads</span>
+
+        <strong id="leadsCount">
+          0
+        </strong>
+
+        <small>Captured</small>
+
+      </div>
+
+
+      <div class="stat">
+
+        <span>Qualified</span>
+
+        <strong id="qualifiedCount">
+          0
+        </strong>
+
+        <small>AI Qualified</small>
+
+      </div>
+
+
+      <div class="stat">
+
+        <span>Automations</span>
+
+        <strong id="automationCount">
+          0
+        </strong>
+
+        <small>Completed</small>
+
+      </div>
+
+    </section>
+
+
+    <!-- SUCCESS -->
+    <section
+      id="successBox"
+      class="success-box">
+
+      <div class="success-icon">
+        ✓
+      </div>
+
+      <div>
+
+        <h2>
+          Automation Complete
+        </h2>
+
+        <p>
+          Lead processed successfully and CRM updated.
+        </p>
+
+      </div>
+
+
+      <button
+        onclick="runAutomation()"
+        class="again-btn"
+        type="button">
+
+        🔄 Run Again
+
+      </button>
+
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer>
+
+    <div>
+      <strong>⚡ QuantumFlow AI</strong>
+    </div>
 
     <p>
-      Run your complete lead automation workflow with one click.
+      AI Automation • Lead Generation • CRM
     </p>
 
-    <button id="runBtn" class="run-btn">
-      🚀 Run AI Automation
-    </button>
+    <span>
+      © 2026 QuantumFlow AI
+    </span>
 
-    <p class="hint">
-      Lead → AI Score → Follow-up → CRM
-    </p>
-  </section>
+  </footer>
 
 
-  <!-- LIVE STATUS -->
-  <section class="panel">
-
-    <div class="panel-title">
-      <h2>Automation Status</h2>
-      <span id="workflowStatus">Ready</span>
-    </div>
-
-    <div class="progress">
-      <div id="progressBar"></div>
-    </div>
-
-    <div id="workflow" class="workflow">
-
-      <div class="step" id="step1">
-        <div class="icon">👤</div>
-        <div>
-          <strong>Lead Capture</strong>
-          <small>Waiting...</small>
-        </div>
-        <span class="check">○</span>
-      </div>
-
-      <div class="line"></div>
-
-      <div class="step" id="step2">
-        <div class="icon">🧠</div>
-        <div>
-          <strong>AI Lead Scoring</strong>
-          <small>Waiting...</small>
-        </div>
-        <span class="check">○</span>
-      </div>
-
-      <div class="line"></div>
-
-      <div class="step" id="step3">
-        <div class="icon">✉️</div>
-        <div>
-          <strong>AI Follow-up</strong>
-          <small>Waiting...</small>
-        </div>
-        <span class="check">○</span>
-      </div>
-
-      <div class="line"></div>
-
-      <div class="step" id="step4">
-        <div class="icon">📊</div>
-        <div>
-          <strong>CRM Update</strong>
-          <small>Waiting...</small>
-        </div>
-        <span class="check">○</span>
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- LEAD -->
-  <section class="panel">
-
-    <div class="panel-title">
-      <h2>Latest Lead</h2>
-      <span class="live-label">LIVE</span>
-    </div>
-
-    <div class="lead-card">
-
-      <div class="avatar" id="leadAvatar">JD</div>
-
-      <div class="lead-info">
-        <h3 id="leadName">Waiting for lead...</h3>
-        <p id="leadBusiness">No lead generated</p>
-        <span id="leadEmail">—</span>
-      </div>
-
-      <div class="score">
-        <small>AI Score</small>
-        <strong id="leadScore">--</strong>
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- FOLLOW UP -->
-  <section class="panel">
-
-    <div class="panel-title">
-      <h2>AI Follow-up</h2>
-    </div>
-
-    <div id="messageBox" class="message">
-      <span>🤖</span>
-      <p>AI follow-up message will appear here.</p>
-    </div>
-
-  </section>
-
-
-  <!-- DASHBOARD -->
-  <section class="dashboard">
-
-    <div class="stat">
-      <span>Leads</span>
-      <strong id="leadsCount">0</strong>
-    </div>
-
-    <div class="stat">
-      <span>Qualified</span>
-      <strong id="qualifiedCount">0</strong>
-    </div>
-
-    <div class="stat">
-      <span>Automations</span>
-      <strong id="automationCount">0</strong>
-    </div>
-
-  </section>
-
-
-  <!-- RESULT -->
-  <section id="successBox" class="success-box">
-
-    <div class="success-icon">✓</div>
-
-    <h2>Automation Complete</h2>
-
-    <p>
-      Your lead has been processed successfully.
-    </p>
-
-    <button onclick="runAutomation()" class="again-btn">
-      🔄 Run Again
-    </button>
-
-  </section>
-
-</main>
-
-
-<footer>
-  <p>© 2026 QuantumFlow AI</p>
-  <span>AI Automation • Lead Generation • CRM</span>
-</footer>
-
-
-<script src="script.js"></script>
+  <!-- JAVASCRIPT -->
+  <script src="script.js"></script>
 
 </body>
-     </html>
+  </html>
