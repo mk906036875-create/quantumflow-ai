@@ -1,822 +1,203 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>QuantumFlow AI — AI Automation Platform</title>
-
-  <meta name="description"
-        content="QuantumFlow AI helps businesses automate leads, customer replies, appointments and follow-ups with AI.">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet">
+  <title>QuantumFlow AI | Automation Demo</title>
 
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- ================= NAVBAR ================= -->
-
-<header class="navbar">
-
+<header class="topbar">
   <div class="logo">
-    <span class="logo-icon">Q</span>
-    <span>QuantumFlow<span class="ai"> AI</span></span>
+    <span>⚡</span> QuantumFlow AI
   </div>
 
-  <nav>
-    <a href="#features">Features</a>
-    <a href="#dashboard">Dashboard</a>
-    <a href="#automation">Automation</a>
-    <a href="#pricing">Pricing</a>
-  </nav>
-
-  <button class="nav-btn" onclick="openDemo()">
-    Book a Demo
-  </button>
-
+  <div class="status">
+    <span class="dot"></span> Online
+  </div>
 </header>
 
+<main>
 
-<!-- ================= HERO ================= -->
-
-<section class="hero">
-
-  <div class="hero-content">
-
-    <div class="badge">
-      ⚡ AI-Powered Business Automation
-    </div>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="badge">AI AUTOMATION PLATFORM</div>
 
     <h1>
-      Automate Your Business.
-      <span>Grow Faster.</span>
+      Automate Your Business
+      <span>With AI</span>
     </h1>
 
     <p>
-      QuantumFlow AI automates lead capture, customer replies,
-      follow-ups and appointments — so your business can run smarter,
-      faster and 24/7.
+      Run your complete lead automation workflow with one click.
     </p>
 
-    <div class="hero-buttons">
-
-      <button class="primary-btn" onclick="openDemo()">
-        Start Free Demo →
-      </button>
-
-      <button class="secondary-btn" onclick="scrollToDashboard()">
-        View Live Dashboard
-      </button>
-
-    </div>
-
-    <div class="trust">
-
-      <div>
-        <strong>24/7</strong>
-        <small>AI Automation</small>
-      </div>
-
-      <div>
-        <strong>10x</strong>
-        <small>Faster Follow-ups</small>
-      </div>
-
-      <div>
-        <strong>99%</strong>
-        <small>Lead Response</small>
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- HERO AI PANEL -->
-
-  <div class="hero-panel">
-
-    <div class="panel-header">
-
-      <span>QuantumFlow AI</span>
-
-      <span class="online">
-        ● LIVE
-      </span>
-
-    </div>
-
-    <div class="ai-screen">
-
-      <div class="ai-message">
-
-        <div class="avatar">AI</div>
-
-        <div>
-
-          <strong>AI Lead Assistant</strong>
-
-          <p>
-            New high-value lead detected.
-          </p>
-
-        </div>
-
-      </div>
-
-
-      <div class="lead-card">
-
-        <div class="lead-top">
-
-          <div>
-            <small>New Lead</small>
-            <h3>Sarah Johnson</h3>
-          </div>
-
-          <span class="hot">HOT</span>
-
-        </div>
-
-        <p>
-          Interested in your automation service.
-        </p>
-
-        <div class="lead-actions">
-
-          <button onclick="generateReply()">
-            ✨ Generate AI Reply
-          </button>
-
-          <button onclick="showNotification('Lead added to CRM')">
-            + Add to CRM
-          </button>
-
-        </div>
-
-      </div>
-
-
-      <div id="aiReply" class="ai-reply hidden">
-
-        <strong>AI Generated Reply</strong>
-
-        <p>
-          Hi Sarah! Thanks for reaching out.
-          I'd love to show you how QuantumFlow AI can
-          automate your customer follow-ups and lead management.
-          Would you be available for a quick demo?
-        </p>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- ================= STATS ================= -->
-
-<section class="stats">
-
-  <div class="stat-card">
-    <span>⚡</span>
-    <h2>1,248</h2>
-    <p>Leads Automated</p>
-  </div>
-
-  <div class="stat-card">
-    <span>🤖</span>
-    <h2>3,892</h2>
-    <p>AI Replies Generated</p>
-  </div>
-
-  <div class="stat-card">
-    <span>📅</span>
-    <h2>486</h2>
-    <p>Appointments Booked</p>
-  </div>
-
-  <div class="stat-card">
-    <span>💰</span>
-    <h2>$84K</h2>
-    <p>Revenue Influenced</p>
-  </div>
-
-</section>
-
-
-<!-- ================= FEATURES ================= -->
-
-<section id="features" class="section">
-
-  <div class="section-heading">
-
-    <span>POWERFUL AUTOMATION</span>
-
-    <h2>
-      Everything Your Business
-      <span>Needs to Scale</span>
-    </h2>
-
-    <p>
-      Replace repetitive manual work with intelligent AI automation.
-    </p>
-
-  </div>
-
-
-  <div class="feature-grid">
-
-    <div class="feature-card">
-
-      <div class="feature-icon">🎯</div>
-
-      <h3>AI Lead Capture</h3>
-
-      <p>
-        Capture and organize leads automatically from your website,
-        forms and campaigns.
-      </p>
-
-      <button onclick="showNotification('AI Lead Capture activated')">
-        Try Demo →
-      </button>
-
-    </div>
-
-
-    <div class="feature-card">
-
-      <div class="feature-icon">💬</div>
-
-      <h3>AI Customer Replies</h3>
-
-      <p>
-        Generate personalized customer responses instantly with AI.
-      </p>
-
-      <button onclick="generateReply()">
-        Try Demo →
-      </button>
-
-    </div>
-
-
-    <div class="feature-card">
-
-      <div class="feature-icon">📅</div>
-
-      <h3>Appointment Automation</h3>
-
-      <p>
-        Automatically manage booking requests and follow-ups.
-      </p>
-
-      <button onclick="showNotification('Appointment automation activated')">
-        Try Demo →
-      </button>
-
-    </div>
-
-
-    <div class="feature-card">
-
-      <div class="feature-icon">📊</div>
-
-      <h3>Smart CRM</h3>
-
-      <p>
-        Track leads, conversations, sales and customer activity
-        from one dashboard.
-      </p>
-
-      <button onclick="scrollToDashboard()">
-        Open CRM →
-      </button>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- ================= DASHBOARD ================= -->
-
-<section id="dashboard" class="dashboard-section">
-
-  <div class="section-heading">
-
-    <span>LIVE BUSINESS INTELLIGENCE</span>
-
-    <h2>
-      AI Lead
-      <span>Dashboard</span>
-    </h2>
-
-  </div>
-
-
-  <div class="dashboard">
-
-    <aside class="sidebar">
-
-      <div class="side-logo">
-        Q
-      </div>
-
-      <a class="active">📊 Dashboard</a>
-      <a>🎯 Leads</a>
-      <a>💬 Messages</a>
-      <a>📅 Appointments</a>
-      <a>⚙️ Automation</a>
-
-    </aside>
-
-
-    <main class="dash-main">
-
-      <div class="dash-top">
-
-        <div>
-
-          <small>Welcome back</small>
-
-          <h2>AI Business Overview</h2>
-
-        </div>
-
-        <button class="primary-btn"
-                onclick="showNotification('New automation created')">
-          + New Automation
-        </button>
-
-      </div>
-
-
-      <div class="metrics">
-
-        <div class="metric">
-
-          <small>Total Leads</small>
-
-          <h2>1,248</h2>
-
-          <span class="up">
-            ↑ 18.4%
-          </span>
-
-        </div>
-
-
-        <div class="metric">
-
-          <small>Qualified Leads</small>
-
-          <h2>684</h2>
-
-          <span class="up">
-            ↑ 12.7%
-          </span>
-
-        </div>
-
-
-        <div class="metric">
-
-          <small>Conversions</small>
-
-          <h2>186</h2>
-
-          <span class="up">
-            ↑ 24.3%
-          </span>
-
-        </div>
-
-
-        <div class="metric">
-
-          <small>Revenue</small>
-
-          <h2>$84,290</h2>
-
-          <span class="up">
-            ↑ 31.8%
-          </span>
-
-        </div>
-
-      </div>
-
-
-      <div class="pipeline">
-
-        <h3>Lead Pipeline</h3>
-
-        <div class="pipeline-grid">
-
-          <div>
-            <span>New</span>
-            <strong>326</strong>
-          </div>
-
-          <div>
-            <span>Contacted</span>
-            <strong>284</strong>
-          </div>
-
-          <div>
-            <span>Qualified</span>
-            <strong>186</strong>
-          </div>
-
-          <div>
-            <span>Converted</span>
-            <strong>92</strong>
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="recent-leads">
-
-        <div class="table-header">
-
-          <h3>Recent Leads</h3>
-
-          <button onclick="showNotification('All leads opened')">
-            View All →
-          </button>
-
-        </div>
-
-
-        <div class="lead-row">
-
-          <div class="person">
-            <div class="person-avatar">SJ</div>
-
-            <div>
-              <strong>Sarah Johnson</strong>
-              <small>USA • SaaS</small>
-            </div>
-          </div>
-
-          <span class="status hot-status">
-            Hot
-          </span>
-
-          <span>$12,000</span>
-
-          <button onclick="generateReply()">
-            Reply
-          </button>
-
-        </div>
-
-
-        <div class="lead-row">
-
-          <div class="person">
-            <div class="person-avatar">MK</div>
-
-            <div>
-              <strong>Michael King</strong>
-              <small>USA • Agency</small>
-            </div>
-          </div>
-
-          <span class="status warm-status">
-            Warm
-          </span>
-
-          <span>$7,500</span>
-
-          <button onclick="generateReply()">
-            Reply
-          </button>
-
-        </div>
-
-
-        <div class="lead-row">
-
-          <div class="person">
-            <div class="person-avatar">EW</div>
-
-            <div>
-              <strong>Emma Wilson</strong>
-              <small>UK • Consulting</small>
-            </div>
-          </div>
-
-          <span class="status new-status">
-            New
-          </span>
-
-          <span>$4,800</span>
-
-          <button onclick="generateReply()">
-            Reply
-          </button>
-
-        </div>
-
-      </div>
-
-    </main>
-
-  </div>
-
-</section>
-
-
-<!-- ================= AUTOMATION ================= -->
-
-<section id="automation" class="section automation">
-
-  <div class="section-heading">
-
-    <span>NO-CODE AUTOMATION</span>
-
-    <h2>
-      Build Your
-      <span>AI Workflow</span>
-    </h2>
-
-    <p>
-      Connect your lead generation, communication and sales process
-      into one automated workflow.
-    </p>
-
-  </div>
-
-
-  <div class="workflow">
-
-    <div class="workflow-step">
-
-      <span>01</span>
-
-      <div>
-        <h3>Lead Captured</h3>
-        <p>Website form detects a new lead.</p>
-      </div>
-
-    </div>
-
-
-    <div class="arrow">→</div>
-
-
-    <div class="workflow-step">
-
-      <span>02</span>
-
-      <div>
-        <h3>AI Qualifies</h3>
-        <p>AI analyzes the lead automatically.</p>
-      </div>
-
-    </div>
-
-
-    <div class="arrow">→</div>
-
-
-    <div class="workflow-step">
-
-      <span>03</span>
-
-      <div>
-        <h3>AI Replies</h3>
-        <p>Personalized response is generated.</p>
-      </div>
-
-    </div>
-
-
-    <div class="arrow">→</div>
-
-
-    <div class="workflow-step">
-
-      <span>04</span>
-
-      <div>
-        <h3>CRM Updated</h3>
-        <p>Lead status updates automatically.</p>
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- ================= PRICING ================= -->
-
-<section id="pricing" class="section pricing">
-
-  <div class="section-heading">
-
-    <span>SIMPLE PRICING</span>
-
-    <h2>
-      Start Small.
-      <span>Scale Fast.</span>
-    </h2>
-
-  </div>
-
-
-  <div class="pricing-grid">
-
-    <div class="price-card">
-
-      <h3>Starter</h3>
-
-      <p>For small businesses</p>
-
-      <h2>$49<span>/mo</span></h2>
-
-      <ul>
-        <li>✓ 500 AI interactions</li>
-        <li>✓ Lead capture</li>
-        <li>✓ Basic CRM</li>
-        <li>✓ Email support</li>
-      </ul>
-
-      <button onclick="openDemo()">
-        Start Free
-      </button>
-
-    </div>
-
-
-    <div class="price-card featured">
-
-      <div class="popular">
-        MOST POPULAR
-      </div>
-
-      <h3>Growth</h3>
-
-      <p>For growing businesses</p>
-
-      <h2>$149<span>/mo</span></h2>
-
-      <ul>
-        <li>✓ 5,000 AI interactions</li>
-        <li>✓ AI Lead Qualification</li>
-        <li>✓ Smart CRM</li>
-        <li>✓ Appointment Automation</li>
-        <li>✓ Priority Support</li>
-      </ul>
-
-      <button onclick="openDemo()">
-        Start Free Trial
-      </button>
-
-    </div>
-
-
-    <div class="price-card">
-
-      <h3>Enterprise</h3>
-
-      <p>For large teams</p>
-
-      <h2>Custom</h2>
-
-      <ul>
-        <li>✓ Unlimited workflows</li>
-        <li>✓ Custom AI automation</li>
-        <li>✓ API integrations</li>
-        <li>✓ Dedicated support</li>
-      </ul>
-
-      <button onclick="openDemo()">
-        Contact Sales
-      </button>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- ================= CTA ================= -->
-
-<section class="cta">
-
-  <div>
-
-    <span>READY TO AUTOMATE?</span>
-
-    <h2>
-      Turn Your Business Into
-      an AI-Powered Business.
-    </h2>
-
-    <p>
-      Start your QuantumFlow AI demo today.
-    </p>
-
-    <button class="primary-btn" onclick="openDemo()">
-      Book Your Free Demo →
+    <button id="runBtn" class="run-btn">
+      🚀 Run AI Automation
     </button>
 
-  </div>
+    <p class="hint">
+      Lead → AI Score → Follow-up → CRM
+    </p>
+  </section>
 
-</section>
+
+  <!-- LIVE STATUS -->
+  <section class="panel">
+
+    <div class="panel-title">
+      <h2>Automation Status</h2>
+      <span id="workflowStatus">Ready</span>
+    </div>
+
+    <div class="progress">
+      <div id="progressBar"></div>
+    </div>
+
+    <div id="workflow" class="workflow">
+
+      <div class="step" id="step1">
+        <div class="icon">👤</div>
+        <div>
+          <strong>Lead Capture</strong>
+          <small>Waiting...</small>
+        </div>
+        <span class="check">○</span>
+      </div>
+
+      <div class="line"></div>
+
+      <div class="step" id="step2">
+        <div class="icon">🧠</div>
+        <div>
+          <strong>AI Lead Scoring</strong>
+          <small>Waiting...</small>
+        </div>
+        <span class="check">○</span>
+      </div>
+
+      <div class="line"></div>
+
+      <div class="step" id="step3">
+        <div class="icon">✉️</div>
+        <div>
+          <strong>AI Follow-up</strong>
+          <small>Waiting...</small>
+        </div>
+        <span class="check">○</span>
+      </div>
+
+      <div class="line"></div>
+
+      <div class="step" id="step4">
+        <div class="icon">📊</div>
+        <div>
+          <strong>CRM Update</strong>
+          <small>Waiting...</small>
+        </div>
+        <span class="check">○</span>
+      </div>
+
+    </div>
+
+  </section>
 
 
-<!-- ================= FOOTER ================= -->
+  <!-- LEAD -->
+  <section class="panel">
+
+    <div class="panel-title">
+      <h2>Latest Lead</h2>
+      <span class="live-label">LIVE</span>
+    </div>
+
+    <div class="lead-card">
+
+      <div class="avatar" id="leadAvatar">JD</div>
+
+      <div class="lead-info">
+        <h3 id="leadName">Waiting for lead...</h3>
+        <p id="leadBusiness">No lead generated</p>
+        <span id="leadEmail">—</span>
+      </div>
+
+      <div class="score">
+        <small>AI Score</small>
+        <strong id="leadScore">--</strong>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- FOLLOW UP -->
+  <section class="panel">
+
+    <div class="panel-title">
+      <h2>AI Follow-up</h2>
+    </div>
+
+    <div id="messageBox" class="message">
+      <span>🤖</span>
+      <p>AI follow-up message will appear here.</p>
+    </div>
+
+  </section>
+
+
+  <!-- DASHBOARD -->
+  <section class="dashboard">
+
+    <div class="stat">
+      <span>Leads</span>
+      <strong id="leadsCount">0</strong>
+    </div>
+
+    <div class="stat">
+      <span>Qualified</span>
+      <strong id="qualifiedCount">0</strong>
+    </div>
+
+    <div class="stat">
+      <span>Automations</span>
+      <strong id="automationCount">0</strong>
+    </div>
+
+  </section>
+
+
+  <!-- RESULT -->
+  <section id="successBox" class="success-box">
+
+    <div class="success-icon">✓</div>
+
+    <h2>Automation Complete</h2>
+
+    <p>
+      Your lead has been processed successfully.
+    </p>
+
+    <button onclick="runAutomation()" class="again-btn">
+      🔄 Run Again
+    </button>
+
+  </section>
+
+</main>
+
 
 <footer>
-
-  <div class="logo">
-    <span class="logo-icon">Q</span>
-    QuantumFlow AI
-  </div>
-
-  <p>
-    AI Automation for the next generation of businesses.
-  </p>
-
-  <p class="copyright">
-    © 2026 QuantumFlow AI. All rights reserved.
-  </p>
-
+  <p>© 2026 QuantumFlow AI</p>
+  <span>AI Automation • Lead Generation • CRM</span>
 </footer>
-
-
-<!-- ================= DEMO MODAL ================= -->
-
-<div id="demoModal" class="modal">
-
-  <div class="modal-box">
-
-    <button class="close"
-            onclick="closeDemo()">
-      ×
-    </button>
-
-    <h2>Book Your AI Demo</h2>
-
-    <p>
-      See how QuantumFlow AI can automate your business.
-    </p>
-
-    <input
-      type="text"
-      id="demoName"
-      placeholder="Your Name">
-
-    <input
-      type="email"
-      id="demoEmail"
-      placeholder="Business Email">
-
-    <input
-      type="text"
-      id="demoBusiness"
-      placeholder="Business Name">
-
-    <button class="primary-btn"
-            onclick="submitDemo()">
-      Request Demo →
-    </button>
-
-  </div>
-
-</div>
-
-
-<!-- ================= NOTIFICATION ================= -->
-
-<div id="notification" class="notification">
-  Action completed successfully.
-</div>
 
 
 <script src="script.js"></script>
 
 </body>
-  </html>
+     </html>
