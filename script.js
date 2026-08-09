@@ -1,25 +1,109 @@
-let running = false;
+ /* =========================================================
+   QUANTUMFLOW AI
+   ONE-CLICK AI AUTOMATION DEMO
+   ========================================================= */
+
+let isRunning = false;
 
 let leads = 0;
 let qualified = 0;
 let automations = 0;
 
+
+/* =========================
+   DEMO LEADS
+   ========================= */
+
+const demoLeads = [
+  {
+    name: "John Davis",
+    initials: "JD",
+    business: "Davis Digital Agency",
+    email: "john@davisdigital.com",
+    score: 94
+  },
+  {
+    name: "Sarah Miller",
+    initials: "SM",
+    business: "Miller Growth Studio",
+    email: "sarah@millergrowth.com",
+    score: 91
+  },
+  {
+    name: "Michael Brown",
+    initials: "MB",
+    business: "Brown Marketing Co.",
+    email: "michael@brownmarketing.com",
+    score: 88
+  },
+  {
+    name: "Emily Wilson",
+    initials: "EW",
+    business: "Wilson Creative",
+    email: "emily@wilsoncreative.com",
+    score: 96
+  }
+];
+
+
+/* =========================
+   FOLLOW-UP MESSAGES
+   ========================= */
+
+const followUpMessages = [
+  "Hi! Thanks for your interest. Our AI automation system can help your business capture and qualify leads automatically. Would you like to see a quick demo?",
+
+  "Hi! We noticed your business could benefit from automated lead follow-ups. QuantumFlow AI can help reduce manual work and improve response time. Would you like to learn more?",
+
+  "Hello! Your lead has been successfully qualified by our AI system. We can automatically manage follow-ups and CRM updates for your team. Let's connect!"
+];
+
+
+/* =========================
+   ELEMENTS
+   ========================= */
+
 const runBtn = document.getElementById("runBtn");
+
 const progressBar = document.getElementById("progressBar");
-const workflowStatus = document.getElementById("workflowStatus");
 
-const leadsCount = document.getElementById("leadsCount");
-const qualifiedCount = document.getElementById("qualifiedCount");
-const automationCount = document.getElementById("automationCount");
+const workflowStatus =
+  document.getElementById("workflowStatus");
 
-const leadName = document.getElementById("leadName");
-const leadBusiness = document.getElementById("leadBusiness");
-const leadEmail = document.getElementById("leadEmail");
-const leadAvatar = document.getElementById("leadAvatar");
-const leadScore = document.getElementById("leadScore");
+const successBox =
+  document.getElementById("successBox");
 
-const messageBox = document.getElementById("messageBox");
-const successBox = document.getElementById("successBox");
+const leadAvatar =
+  document.getElementById("leadAvatar");
+
+const leadName =
+  document.getElementById("leadName");
+
+const leadBusiness =
+  document.getElementById("leadBusiness");
+
+const leadEmail =
+  document.getElementById("leadEmail");
+
+const leadScore =
+  document.getElementById("leadScore");
+
+const messageBox =
+  document.getElementById("messageBox");
+
+const leadsCount =
+  document.getElementById("leadsCount");
+
+const qualifiedCount =
+  document.getElementById("qualifiedCount");
+
+const automationCount =
+  document.getElementById("automationCount");
+
+
+/* =========================
+   STEP ELEMENTS
+   ========================= */
 
 const steps = [
   document.getElementById("step1"),
@@ -28,196 +112,316 @@ const steps = [
   document.getElementById("step4")
 ];
 
+
+/* =========================
+   UTILITY
+   ========================= */
+
 function wait(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-function resetSteps() {
-  steps.forEach(step => {
-    step.classList.remove("active", "done");
-
-    step.querySelector("small").textContent = "Waiting...";
-    step.querySelector(".check").textContent = "○";
+  return new Promise(resolve => {
+    setTimeout(resolve, ms);
   });
 }
 
-function activateStep(index, text) {
-  const step = steps[index];
 
-  step.classList.add("active");
-  step.querySelector("small").textContent = text;
-}
+/* =========================
+   RESET WORKFLOW
+   ========================= */
 
-function completeStep(index) {
-  const step = steps[index];
+function resetWorkflow() {
 
-  step.classList.remove("active");
-  step.classList.add("done");
+  steps.forEach(step => {
 
-  step.querySelector("small").textContent = "Completed";
-  step.querySelector(".check").textContent = "✓";
-}
+    if (!step) return;
 
-async function runAutomation() {
+    step.classList.remove(
+      "active",
+      "complete"
+    );
 
-  if (running) return;
+    const small = step.querySelector("small");
+    const check = step.querySelector(".check");
 
-  running = true;
+    if (small) {
+      small.textContent = "Waiting...";
+    }
 
-  runBtn.disabled = true;
-  runBtn.textContent = "⚡ Running...";
+    if (check) {
+      check.textContent = "○";
+    }
 
-  successBox.style.display = "none";
-
-  resetSteps();
+  });
 
   progressBar.style.width = "0%";
-  workflowStatus.textContent = "Processing";
 
-  /* =========================
-     STEP 1 — LEAD CAPTURE
-  ========================= */
+  workflowStatus.textContent = "Ready";
 
-  activateStep(0, "Capturing new lead...");
+  workflowStatus.classList.remove(
+    "running",
+    "complete"
+  );
 
-  progressBar.style.width = "20%";
+  successBox.classList.remove("show");
+}
 
-  await wait(1000);
 
-  const names = [
-    "John Davis",
-    "Sarah Miller",
-    "Michael Brown",
-    "Emily Wilson",
-    "David Johnson"
-  ];
+/* =========================
+   ACTIVATE STEP
+   ========================= */
 
-  const businesses = [
-    "Growth Labs",
-    "Nova Digital",
-    "Bright Solutions",
-    "FutureScale",
-    "Prime Business"
-  ];
+async function runStep(
+  step,
+  activeText,
+  completeText,
+  progress
+) {
 
-  const randomIndex =
-    Math.floor(Math.random() * names.length);
+  if (!step) return;
 
-  const name = names[randomIndex];
-  const business = businesses[randomIndex];
+  const small = step.querySelector("small");
+  const check = step.querySelector(".check");
 
-  const email =
-    name.toLowerCase()
-      .replace(" ", ".") +
-    "@example.com";
+  step.classList.add("active");
 
-  leadName.textContent = name;
-  leadBusiness.textContent = business;
-  leadEmail.textContent = email;
+  if (small) {
+    small.textContent = activeText;
+  }
 
-  leadAvatar.textContent =
-    name
-      .split(" ")
-      .map(word => word[0])
-      .join("");
+  if (check) {
+    check.textContent = "◌";
+  }
 
-  leads++;
+  progressBar.style.width = progress + "%";
+
+  await wait(1100);
+
+  step.classList.remove("active");
+  step.classList.add("complete");
+
+  if (small) {
+    small.textContent = completeText;
+  }
+
+  if (check) {
+    check.textContent = "✓";
+  }
+
+}
+
+
+/* =========================
+   CREATE LEAD
+   ========================= */
+
+function generateLead() {
+
+  const lead =
+    demoLeads[
+      Math.floor(
+        Math.random() * demoLeads.length
+      )
+    ];
+
+  leadAvatar.textContent = lead.initials;
+
+  leadName.textContent = lead.name;
+
+  leadBusiness.textContent =
+    lead.business;
+
+  leadEmail.textContent =
+    lead.email;
+
+  leadScore.textContent =
+    lead.score;
+
+  return lead;
+}
+
+
+/* =========================
+   UPDATE COUNTERS
+   ========================= */
+
+function updateCounters() {
 
   leadsCount.textContent = leads;
 
-  completeStep(0);
+  qualifiedCount.textContent =
+    qualified;
+
+  automationCount.textContent =
+    automations;
+
+}
 
 
-  /* =========================
-     STEP 2 — AI SCORE
-  ========================= */
+/* =========================
+   AI MESSAGE
+   ========================= */
 
-  activateStep(1, "AI analyzing lead...");
+function showFollowUp() {
 
-  progressBar.style.width = "45%";
-
-  await wait(1200);
-
-  const score =
-    Math.floor(Math.random() * 16) + 80;
-
-  leadScore.textContent = score;
-
-  qualified++;
-
-  qualifiedCount.textContent = qualified;
-
-  completeStep(1);
-
-
-  /* =========================
-     STEP 3 — AI FOLLOW-UP
-  ========================= */
-
-  activateStep(
-    2,
-    "Generating personalized message..."
-  );
-
-  progressBar.style.width = "70%";
-
-  await wait(1200);
+  const message =
+    followUpMessages[
+      Math.floor(
+        Math.random() *
+        followUpMessages.length
+      )
+    ];
 
   messageBox.innerHTML = `
     <span>🤖</span>
-
-    <p>
-      Hi ${name.split(" ")[0]}, thanks for your interest.
-      Our AI automation system can help ${business}
-      capture and qualify leads automatically.
-      Would you like to see a quick demo?
-    </p>
+    <p>${message}</p>
   `;
 
-  completeStep(2);
+}
 
 
-  /* =========================
+/* =========================
+   MAIN AUTOMATION
+   ========================= */
+
+async function runAutomation() {
+
+  if (isRunning) {
+    return;
+  }
+
+  isRunning = true;
+
+  runBtn.classList.add("running");
+
+  runBtn.textContent =
+    "⚙️ AI Automation Running...";
+
+  resetWorkflow();
+
+  workflowStatus.textContent =
+    "Running";
+
+  workflowStatus.classList.add(
+    "running"
+  );
+
+
+  /* --------------------------------
+     STEP 1 — LEAD CAPTURE
+     -------------------------------- */
+
+  const lead =
+    generateLead();
+
+  await runStep(
+    steps[0],
+    "Capturing lead...",
+    "Lead captured",
+    25
+  );
+
+  leads++;
+
+  updateCounters();
+
+
+  /* --------------------------------
+     STEP 2 — AI SCORING
+     -------------------------------- */
+
+  await runStep(
+    steps[1],
+    "Analyzing lead...",
+    "Lead qualified",
+    50
+  );
+
+  qualified++;
+
+  updateCounters();
+
+
+  /* --------------------------------
+     STEP 3 — AI FOLLOW-UP
+     -------------------------------- */
+
+  showFollowUp();
+
+  await runStep(
+    steps[2],
+    "Generating AI message...",
+    "Follow-up sent",
+    75
+  );
+
+
+  /* --------------------------------
      STEP 4 — CRM UPDATE
-  ========================= */
+     -------------------------------- */
 
-  activateStep(3, "Updating CRM...");
-
-  progressBar.style.width = "90%";
-
-  await wait(1200);
+  await runStep(
+    steps[3],
+    "Updating CRM...",
+    "CRM updated",
+    100
+  );
 
   automations++;
 
-  automationCount.textContent = automations;
-
-  completeStep(3);
-
-  progressBar.style.width = "100%";
-
-  workflowStatus.textContent = "Completed";
-
-  await wait(500);
+  updateCounters();
 
 
-  /* =========================
-     SUCCESS
-  ========================= */
+  /* --------------------------------
+     COMPLETE
+     -------------------------------- */
 
-  successBox.style.display = "block";
+  workflowStatus.textContent =
+    "Complete";
 
-  runBtn.disabled = false;
+  workflowStatus.classList.remove(
+    "running"
+  );
+
+  workflowStatus.classList.add(
+    "complete"
+  );
+
+  runBtn.textContent =
+    "✓ Automation Complete";
+
+  successBox.classList.add("show");
+
+
+  await wait(800);
 
   runBtn.textContent =
     "🚀 Run AI Automation";
 
-  running = false;
+  runBtn.classList.remove(
+    "running"
+  );
+
+  isRunning = false;
+
 }
 
 
-/* ONE CLICK BUTTON */
+/* =========================
+   INITIAL STATE
+   ========================= */
 
-runBtn.addEventListener(
-  "click",
-  runAutomation
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+
+    updateCounters();
+
+    resetWorkflow();
+
+    if (successBox) {
+      successBox.classList.remove(
+        "show"
+      );
+    }
+
+  }
 );
