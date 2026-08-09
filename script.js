@@ -1,660 +1,223 @@
-/* =========================================================
-   QUANTUMFLOW AI — INTERACTIVE JAVASCRIPT
-   ========================================================= */
+let running = false;
 
-document.addEventListener("DOMContentLoaded", () => {
+let leads = 0;
+let qualified = 0;
+let automations = 0;
 
-  console.log("QuantumFlow AI initialized successfully.");
+const runBtn = document.getElementById("runBtn");
+const progressBar = document.getElementById("progressBar");
+const workflowStatus = document.getElementById("workflowStatus");
 
-});
+const leadsCount = document.getElementById("leadsCount");
+const qualifiedCount = document.getElementById("qualifiedCount");
+const automationCount = document.getElementById("automationCount");
 
+const leadName = document.getElementById("leadName");
+const leadBusiness = document.getElementById("leadBusiness");
+const leadEmail = document.getElementById("leadEmail");
+const leadAvatar = document.getElementById("leadAvatar");
+const leadScore = document.getElementById("leadScore");
 
-/* =========================================================
-   DEMO MODAL
-   ========================================================= */
+const messageBox = document.getElementById("messageBox");
+const successBox = document.getElementById("successBox");
 
-function openDemo() {
+const steps = [
+  document.getElementById("step1"),
+  document.getElementById("step2"),
+  document.getElementById("step3"),
+  document.getElementById("step4")
+];
 
-  const modal = document.getElementById("demoModal");
-
-  if (!modal) return;
-
-  modal.classList.add("show");
-
-  document.body.style.overflow = "hidden";
-
+function wait(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-
-function closeDemo() {
-
-  const modal = document.getElementById("demoModal");
-
-  if (!modal) return;
-
-  modal.classList.remove("show");
-
-  document.body.style.overflow = "";
-
-}
-
-
-/* Close modal when clicking outside */
-
-document.addEventListener("click", (event) => {
-
-  const modal = document.getElementById("demoModal");
-
-  if (!modal) return;
-
-  if (event.target === modal) {
-    closeDemo();
-  }
-
-});
-
-
-/* Close modal with ESC */
-
-document.addEventListener("keydown", (event) => {
-
-  if (event.key === "Escape") {
-    closeDemo();
-  }
-
-});
-
-
-/* =========================================================
-   DEMO FORM
-   ========================================================= */
-
-function submitDemo() {
-
-  const name =
-    document.getElementById("demoName")?.value.trim();
-
-  const email =
-    document.getElementById("demoEmail")?.value.trim();
-
-  const business =
-    document.getElementById("demoBusiness")?.value.trim();
-
-
-  if (!name || !email || !business) {
-
-    showNotification(
-      "Please complete all fields."
-    );
-
-    return;
-
-  }
-
-
-  if (!validateEmail(email)) {
-
-    showNotification(
-      "Please enter a valid business email."
-    );
-
-    return;
-
-  }
-
-
-  showNotification(
-    `Thanks ${name}! Your demo request has been received.`
-  );
-
-
-  /* Reset form */
-
-  document.getElementById("demoName").value = "";
-  document.getElementById("demoEmail").value = "";
-  document.getElementById("demoBusiness").value = "";
-
-
-  setTimeout(() => {
-
-    closeDemo();
-
-  }, 1800);
-
-}
-
-
-/* =========================================================
-   EMAIL VALIDATION
-   ========================================================= */
-
-function validateEmail(email) {
-
-  const pattern =
-    /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  return pattern.test(email);
-
-}
-
-
-/* =========================================================
-   AI REPLY GENERATOR
-   ========================================================= */
-
-function generateReply() {
-
-  const replyBox =
-    document.getElementById("aiReply");
-
-  if (!replyBox) return;
-
-
-  replyBox.classList.remove("hidden");
-
-
-  replyBox.innerHTML = `
-
-    <strong>✨ AI Generated Reply</strong>
-
-    <p>
-      Hi Sarah! Thanks for reaching out.
-      I'd love to show you how QuantumFlow AI can
-      automate your customer follow-ups and lead
-      management. Would you be available for a
-      quick 15-minute demo?
-    </p>
-
-    <div style="
-      margin-top:12px;
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-    ">
-
-      <button
-        onclick="copyAIReply()"
-        style="
-          padding:8px 11px;
-          border-radius:8px;
-          border:1px solid rgba(167,139,250,.2);
-          background:rgba(124,58,237,.12);
-          color:#c4b5fd;
-          cursor:pointer;
-          font-size:11px;
-        "
-      >
-        Copy Reply
-      </button>
-
-      <button
-        onclick="showNotification('AI reply sent successfully')"
-        style="
-          padding:8px 11px;
-          border-radius:8px;
-          border:1px solid rgba(34,211,238,.2);
-          background:rgba(34,211,238,.08);
-          color:#67e8f9;
-          cursor:pointer;
-          font-size:11px;
-        "
-      >
-        Send Reply
-      </button>
-
-    </div>
-
-  `;
-
-
-  showNotification(
-    "AI reply generated successfully."
-  );
-
-}
-
-
-/* =========================================================
-   COPY AI REPLY
-   ========================================================= */
-
-function copyAIReply() {
-
-  const text =
-    `Hi Sarah! Thanks for reaching out.
-I'd love to show you how QuantumFlow AI can
-automate your customer follow-ups and lead
-management. Would you be available for a
-quick 15-minute demo?`;
-
-
-  if (
-    navigator.clipboard &&
-    navigator.clipboard.writeText
-  ) {
-
-    navigator.clipboard
-      .writeText(text)
-      .then(() => {
-
-        showNotification(
-          "AI reply copied to clipboard."
-        );
-
-      })
-      .catch(() => {
-
-        showNotification(
-          "Copy failed. Please try again."
-        );
-
-      });
-
-  }
-
-}
-
-
-/* =========================================================
-   NOTIFICATION SYSTEM
-   ========================================================= */
-
-let notificationTimer;
-
-
-function showNotification(message) {
-
-  const notification =
-    document.getElementById("notification");
-
-  if (!notification) return;
-
-
-  notification.textContent = message;
-
-  notification.classList.add("show");
-
-
-  clearTimeout(notificationTimer);
-
-
-  notificationTimer =
-    setTimeout(() => {
-
-      notification.classList.remove("show");
-
-    }, 3000);
-
-}
-
-
-/* =========================================================
-   DASHBOARD SCROLL
-   ========================================================= */
-
-function scrollToDashboard() {
-
-  const dashboard =
-    document.getElementById("dashboard");
-
-  if (!dashboard) return;
-
-
-  dashboard.scrollIntoView({
-    behavior: "smooth",
-    block: "start"
+function resetSteps() {
+  steps.forEach(step => {
+    step.classList.remove("active", "done");
+
+    step.querySelector("small").textContent = "Waiting...";
+    step.querySelector(".check").textContent = "○";
   });
-
-
-  showNotification(
-    "Opening AI Lead Dashboard..."
-  );
-
 }
 
-
-/* =========================================================
-   NAVIGATION
-   ========================================================= */
-
-document.querySelectorAll(
-  '.navbar a[href^="#"]'
-).forEach(link => {
-
-  link.addEventListener("click", function(event) {
-
-    const targetId =
-      this.getAttribute("href");
-
-    const target =
-      document.querySelector(targetId);
-
-    if (!target) return;
-
-
-    event.preventDefault();
-
-
-    target.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-
-  });
-
-});
-
-
-/* =========================================================
-   ACTIVE DASHBOARD MENU
-   ========================================================= */
-
-document.querySelectorAll(
-  ".sidebar a"
-).forEach(item => {
-
-  item.addEventListener("click", function() {
-
-    document
-      .querySelectorAll(".sidebar a")
-      .forEach(link => {
-
-        link.classList.remove("active");
-
-      });
-
-
-    this.classList.add("active");
-
-
-    showNotification(
-      `${this.textContent.trim()} selected`
-    );
-
-  });
-
-});
-
-
-/* =========================================================
-   NEW AUTOMATION
-   ========================================================= */
-
-document.addEventListener("click", (event) => {
-
-  const button =
-    event.target.closest(".primary-btn");
-
-  if (!button) return;
-
-
-  const text =
-    button.textContent.trim();
-
-
-  if (
-    text.includes("New Automation")
-  ) {
-
-    showNotification(
-      "Automation workflow created successfully."
-    );
-
-  }
-
-});
-
-
-/* =========================================================
-   LEAD INTERACTIONS
-   ========================================================= */
-
-document.querySelectorAll(
-  ".lead-row button"
-).forEach(button => {
-
-  button.addEventListener("click", () => {
-
-    showNotification(
-      "AI is preparing a personalized reply..."
-    );
-
-  });
-
-});
-
-
-/* =========================================================
-   SIMPLE NUMBER ANIMATION
-   ========================================================= */
-
-function animateNumber(
-  element,
-  target,
-  duration = 1200
-) {
-
-  if (!element) return;
-
-
-  const start = 0;
-
-  const startTime =
-    performance.now();
-
-
-  function update(currentTime) {
-
-    const progress =
-      Math.min(
-        (currentTime - startTime) / duration,
-        1
-      );
-
-
-    const value =
-      Math.floor(
-        start +
-        (target - start) *
-        easeOut(progress)
-      );
-
-
-    element.textContent =
-      value.toLocaleString();
-
-
-    if (progress < 1) {
-
-      requestAnimationFrame(update);
-
-    }
-
-  }
-
-
-  requestAnimationFrame(update);
-
+function activateStep(index, text) {
+  const step = steps[index];
+
+  step.classList.add("active");
+  step.querySelector("small").textContent = text;
 }
 
+function completeStep(index) {
+  const step = steps[index];
 
-function easeOut(t) {
+  step.classList.remove("active");
+  step.classList.add("done");
 
-  return 1 - Math.pow(1 - t, 3);
-
+  step.querySelector("small").textContent = "Completed";
+  step.querySelector(".check").textContent = "✓";
 }
 
+async function runAutomation() {
 
-/* =========================================================
-   DASHBOARD COUNTERS
-   ========================================================= */
+  if (running) return;
 
-function startDashboardCounters() {
+  running = true;
 
-  const metrics =
-    document.querySelectorAll(
-      ".metric h2"
-    );
+  runBtn.disabled = true;
+  runBtn.textContent = "⚡ Running...";
 
+  successBox.style.display = "none";
 
-  if (!metrics.length) return;
+  resetSteps();
 
+  progressBar.style.width = "0%";
+  workflowStatus.textContent = "Processing";
 
-  const values = [
-    1248,
-    684,
-    186,
-    84290
+  /* =========================
+     STEP 1 — LEAD CAPTURE
+  ========================= */
+
+  activateStep(0, "Capturing new lead...");
+
+  progressBar.style.width = "20%";
+
+  await wait(1000);
+
+  const names = [
+    "John Davis",
+    "Sarah Miller",
+    "Michael Brown",
+    "Emily Wilson",
+    "David Johnson"
   ];
 
+  const businesses = [
+    "Growth Labs",
+    "Nova Digital",
+    "Bright Solutions",
+    "FutureScale",
+    "Prime Business"
+  ];
 
-  metrics.forEach((element, index) => {
+  const randomIndex =
+    Math.floor(Math.random() * names.length);
 
-    if (index === 3) {
+  const name = names[randomIndex];
+  const business = businesses[randomIndex];
 
-      animateMoney(
-        element,
-        values[index]
-      );
+  const email =
+    name.toLowerCase()
+      .replace(" ", ".") +
+    "@example.com";
 
-    } else {
+  leadName.textContent = name;
+  leadBusiness.textContent = business;
+  leadEmail.textContent = email;
 
-      animateNumber(
-        element,
-        values[index]
-      );
+  leadAvatar.textContent =
+    name
+      .split(" ")
+      .map(word => word[0])
+      .join("");
 
-    }
+  leads++;
 
-  });
+  leadsCount.textContent = leads;
 
-}
-
-
-function animateMoney(
-  element,
-  target,
-  duration = 1400
-) {
-
-  const startTime =
-    performance.now();
-
-
-  function update(currentTime) {
-
-    const progress =
-      Math.min(
-        (currentTime - startTime) / duration,
-        1
-      );
+  completeStep(0);
 
 
-    const value =
-      Math.floor(
-        target *
-        easeOut(progress)
-      );
+  /* =========================
+     STEP 2 — AI SCORE
+  ========================= */
+
+  activateStep(1, "AI analyzing lead...");
+
+  progressBar.style.width = "45%";
+
+  await wait(1200);
+
+  const score =
+    Math.floor(Math.random() * 16) + 80;
+
+  leadScore.textContent = score;
+
+  qualified++;
+
+  qualifiedCount.textContent = qualified;
+
+  completeStep(1);
 
 
-    element.textContent =
-      "$" +
-      value.toLocaleString();
+  /* =========================
+     STEP 3 — AI FOLLOW-UP
+  ========================= */
 
-
-    if (progress < 1) {
-
-      requestAnimationFrame(update);
-
-    }
-
-  }
-
-
-  requestAnimationFrame(update);
-
-}
-
-
-/* =========================================================
-   INTERSECTION OBSERVER
-   ========================================================= */
-
-const dashboardSection =
-  document.querySelector(
-    ".dashboard-section"
+  activateStep(
+    2,
+    "Generating personalized message..."
   );
 
+  progressBar.style.width = "70%";
 
-if (dashboardSection) {
+  await wait(1200);
 
-  const observer =
-    new IntersectionObserver(
-      entries => {
+  messageBox.innerHTML = `
+    <span>🤖</span>
 
-        entries.forEach(entry => {
+    <p>
+      Hi ${name.split(" ")[0]}, thanks for your interest.
+      Our AI automation system can help ${business}
+      capture and qualify leads automatically.
+      Would you like to see a quick demo?
+    </p>
+  `;
 
-          if (
-            entry.isIntersecting
-          ) {
-
-            startDashboardCounters();
-
-            observer.disconnect();
-
-          }
-
-        });
-
-      },
-      {
-        threshold: 0.25
-      }
-    );
+  completeStep(2);
 
 
-  observer.observe(
-    dashboardSection
-  );
+  /* =========================
+     STEP 4 — CRM UPDATE
+  ========================= */
 
+  activateStep(3, "Updating CRM...");
+
+  progressBar.style.width = "90%";
+
+  await wait(1200);
+
+  automations++;
+
+  automationCount.textContent = automations;
+
+  completeStep(3);
+
+  progressBar.style.width = "100%";
+
+  workflowStatus.textContent = "Completed";
+
+  await wait(500);
+
+
+  /* =========================
+     SUCCESS
+  ========================= */
+
+  successBox.style.display = "block";
+
+  runBtn.disabled = false;
+
+  runBtn.textContent =
+    "🚀 Run AI Automation";
+
+  running = false;
 }
 
 
-/* =========================================================
-   KEYBOARD SHORTCUT
-   ========================================================= */
+/* ONE CLICK BUTTON */
 
-document.addEventListener(
-  "keydown",
-  event => {
-
-    /*
-      Press D to open demo
-    */
-
-    if (
-      event.key.toLowerCase() === "d" &&
-      !event.target.matches("input, textarea")
-    ) {
-
-      openDemo();
-
-    }
-
-  }
-);
-
-
-/* =========================================================
-   CONSOLE BRANDING
-   ========================================================= */
-
-console.log(
-  "%c QuantumFlow AI ",
-  "background:#7c3aed;color:white;font-size:18px;font-weight:bold;padding:8px 14px;border-radius:8px;"
-);
-
-console.log(
-  "%c AI Automation Platform initialized ",
-  "color:#22d3ee;font-size:12px;"
+runBtn.addEventListener(
+  "click",
+  runAutomation
 );
