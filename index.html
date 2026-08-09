@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>QUANTUMFLOW AI | Next-Gen Business Automation</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+
+body{
+background:#050816;
+color:#fff;
+min-height:100vh;
+}
+
+header{
+padding:22px 7%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+border-bottom:1px solid #ffffff15;
+background:#070b1c;
+}
+
+.logo{
+font-size:23px;
+font-weight:800;
+letter-spacing:1px;
+}
+
+.logo span{color:#00e5ff}
+
+.nav a{
+color:#b9c3d6;
+text-decoration:none;
+margin-left:22px;
+font-size:14px;
+}
+
+.hero{
+padding:90px 7%;
+text-align:center;
+background:
+radial-gradient(circle at 50% 30%,#123b6840,transparent 45%);
+}
+
+.badge{
+display:inline-block;
+padding:8px 15px;
+border:1px solid #00e5ff55;
+border-radius:30px;
+color:#00e5ff;
+font-size:13px;
+margin-bottom:22px;
+}
+
+.hero h1{
+font-size:clamp(42px,7vw,82px);
+line-height:1;
+margin-bottom:20px;
+}
+
+.hero h1 span{
+color:#00e5ff;
+}
+
+.hero p{
+max-width:700px;
+margin:auto;
+color:#aab5c9;
+font-size:18px;
+line-height:1.7;
+}
+
+.btn{
+display:inline-block;
+margin-top:30px;
+padding:14px 25px;
+border-radius:10px;
+background:#00cfff;
+color:#001018;
+font-weight:800;
+text-decoration:none;
+border:0;
+cursor:pointer;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:40px 20px;
+}
+
+.section-title{
+text-align:center;
+margin-bottom:30px;
+}
+
+.section-title h2{
+font-size:34px;
+}
+
+.section-title p{
+color:#8793a8;
+margin-top:8px;
+}
+
+.dashboard{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+gap:18px;
+}
+
+.card{
+background:#0b1125;
+border:1px solid #ffffff12;
+border-radius:18px;
+padding:25px;
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+border-color:#00e5ff66;
+}
+
+.card small{
+color:#8995aa;
+}
+
+.number{
+font-size:35px;
+font-weight:800;
+margin-top:10px;
+}
+
+.features{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
+
+.feature{
+background:linear-gradient(145deg,#0c142b,#080d1d);
+padding:28px;
+border-radius:18px;
+border:1px solid #ffffff12;
+}
+
+.icon{
+font-size:32px;
+margin-bottom:15px;
+}
+
+.feature h3{
+margin-bottom:10px;
+}
+
+.feature p{
+color:#8e9aaf;
+line-height:1.6;
+}
+
+.demo{
+max-width:700px;
+margin:auto;
+background:#0b1125;
+padding:28px;
+border-radius:20px;
+border:1px solid #ffffff15;
+}
+
+input,textarea{
+width:100%;
+padding:14px;
+margin:8px 0 15px;
+background:#050816;
+color:#fff;
+border:1px solid #ffffff20;
+border-radius:9px;
+outline:none;
+}
+
+textarea{min-height:100px}
+
+.result{
+margin-top:20px;
+padding:18px;
+background:#050816;
+border-radius:12px;
+color:#b9c6d9;
+line-height:1.6;
+display:none;
+}
+
+footer{
+margin-top:60px;
+padding:30px;
+text-align:center;
+border-top:1px solid #ffffff12;
+color:#66738a;
+}
+
+@media(max-width:650px){
+header{padding:18px}
+.nav{display:none}
+.hero{padding:70px 20px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+⚡ QUANTUM<span>FLOW</span> AI
+</div>
+
+<nav class="nav">
+<a href="#dashboard">Dashboard</a>
+<a href="#automation">Automation</a>
+<a href="#demo">Demo</a>
+</nav>
+
+</header>
+
+
+<section class="hero">
+
+<div class="badge">
+● NEXT-GEN AI AUTOMATION PLATFORM
+</div>
+
+<h1>
+Automate.<br>
+<span>Scale.</span> Grow.
+</h1>
+
+<p>
+QuantumFlow AI helps businesses capture leads,
+automate customer communication, manage appointments
+and turn conversations into growth.
+</p>
+
+<a href="#demo" class="btn">
+Launch AI Demo →
+</a>
+
+</section>
+
+
+<section id="dashboard" class="container">
+
+<div class="section-title">
+<h2>AI Business Command Center</h2>
+<p>Real-time automation overview</p>
+</div>
+
+<div class="dashboard">
+
+<div class="card">
+<small>Total Leads</small>
+<div class="number" id="leads">128</div>
+</div>
+
+<div class="card">
+<small>AI Conversations</small>
+<div class="number">342</div>
+</div>
+
+<div class="card">
+<small>Appointments</small>
+<div class="number">46</div>
+</div>
+
+<div class="card">
+<small>Conversion Rate</small>
+<div class="number">28%</div>
+</div>
+
+</div>
+
+</section>
+
+
+<section id="automation" class="container">
+
+<div class="section-title">
+<h2>Intelligent Automation</h2>
+<p>Everything your business needs in one platform</p>
+</div>
+
+<div class="features">
+
+<div class="feature">
+<div class="icon">🎯</div>
+<h3>AI Lead Generation</h3>
+<p>
+Capture and organize leads automatically
+from your website and campaigns.
+</p>
+</div>
+
+<div class="feature">
+<div class="icon">🤖</div>
+<h3>AI Reply Assistant</h3>
+<p>
+Generate professional customer responses
+in seconds.
+</p>
+</div>
+
+<div class="feature">
+<div class="icon">💬</div>
+<h3>WhatsApp Automation</h3>
+<p>
+Connect with customers and automate
+follow-ups through WhatsApp.
+</p>
+</div>
+
+<div class="feature">
+<div class="icon">📅</div>
+<h3>Smart Appointments</h3>
+<p>
+Manage bookings, reminders and
+customer schedules.
+</p>
+</div>
+
+<div class="feature">
+<div class="icon">🧠</div>
+<h3>AI Customer Support</h3>
+<p>
+Answer common customer questions
+with an intelligent assistant.
+</p>
+</div>
+
+<div class="feature">
+<div class="icon">📈</div>
+<h3>Growth Analytics</h3>
+<p>
+Track leads, conversions and business
+performance from one dashboard.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+<section id="demo" class="container">
+
+<div class="section-title">
+<h2>⚡ Try AI Reply Demo</h2>
+<p>Experience the automation workflow</p>
+</div>
+
+<div class="demo">
+
+<label>Customer Name</label>
+<input id="name" placeholder="Enter customer name">
+
+<label>Customer Requirement</label>
+<textarea id="requirement"
+placeholder="Example: I need a website for my clinic"></textarea>
+
+<button class="btn" onclick="generateAI()">
+Generate AI Reply
+</button>
+
+<div class="result" id="result"></div>
+
+</div>
+
+</section>
+
+
+<footer>
+
+<strong>QUANTUMFLOW AI</strong>
+<br><br>
+Next-Gen Business Automation Platform
+<br><br>
+© 2026 QuantumFlow AI
+
+</footer>
+
+
+<script>
+
+function generateAI(){
+
+let name =
+document.getElementById("name").value || "there";
+
+let requirement =
+document.getElementById("requirement").value ||
+"your business requirement";
+
+let message =
+`Hi ${name},
+
+Thank you for contacting QuantumFlow AI.
+
+We received your requirement regarding:
+"${
