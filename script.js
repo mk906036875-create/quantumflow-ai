@@ -4,9 +4,15 @@
   const status = document.getElementById("workflowStatus");
   const progress = document.getElementById("progressBar");
 
-  const name = document.getElementById("inputName").value || "John Davis";
-  const business = document.getElementById("inputBusiness").value || "Tech Solutions Inc.";
-  const email = document.getElementById("inputEmail").value || "john@techsolutions.com";
+  const name = document.getElementById("inputName").value.trim();
+  const business = document.getElementById("inputBusiness").value.trim();
+  const email = document.getElementById("inputEmail").value.trim();
+
+  // Check Lead Input
+  if (!name || !business || !email) {
+    alert("Please enter Lead Name, Business Name and Email.");
+    return;
+  }
 
   const steps = [
     document.getElementById("step1"),
@@ -16,6 +22,7 @@
   ];
 
   button.disabled = true;
+  button.textContent = "⚡ Running AI Automation...";
   status.textContent = "Running";
   progress.style.width = "0%";
 
@@ -27,6 +34,8 @@
 
   document.getElementById("successBox").style.display = "none";
 
+
+  // Lead Capture
   setTimeout(() => {
 
     document.getElementById("leadAvatar").textContent =
@@ -48,16 +57,20 @@
     const step = steps[index];
 
     step.classList.add("active");
+
     step.querySelector("small").textContent = text;
     step.querySelector(".check").textContent = "✓";
 
     progress.style.width = percent + "%";
+
 
     setTimeout(() => {
 
       step.classList.remove("active");
       step.classList.add("done");
 
+
+      // AI Lead Score
       if (index === 0) {
 
         completeStep(
@@ -66,7 +79,11 @@
           50
         );
 
-      } else if (index === 1) {
+      }
+
+
+      // Qualified Lead
+      else if (index === 1) {
 
         document.getElementById("leadScore").textContent = "92";
         document.getElementById("qualifiedCount").textContent = "1";
@@ -77,7 +94,11 @@
           75
         );
 
-      } else if (index === 2) {
+      }
+
+
+      // AI Follow-up
+      else if (index === 2) {
 
         document.getElementById("messageBox").innerHTML = `
           <span>🤖</span>
@@ -95,7 +116,11 @@
           100
         );
 
-      } else {
+      }
+
+
+      // Complete
+      else {
 
         status.textContent = "Completed";
 
@@ -105,8 +130,10 @@
 
         button.disabled = false;
         button.textContent = "🚀 Run AI Automation";
+
       }
 
     }, 1200);
   }
-     }
+
+         }
