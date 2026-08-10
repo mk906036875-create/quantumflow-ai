@@ -1,34 +1,81 @@
  document.addEventListener("DOMContentLoaded", () => {
-  const runButton = document.querySelector("#runAutomation");
 
-  if (!runButton) return;
+  // Smooth Scroll
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener("click", function (e) {
+      const target = document.querySelector(this.getAttribute("href"));
 
-  runButton.addEventListener("click", () => {
-    runButton.disabled = true;
-    runButton.textContent = "⚡ Running AI Automation...";
+      if (target) {
+        e.preventDefault();
 
-    const steps = [
-      "🔍 Analyzing new lead...",
-      "🤖 AI Lead Score generated: 92/100",
-      "✉️ AI follow-up message created...",
-      "💾 CRM record updated...",
-      "✅ Automation completed successfully!"
-    ];
-
-    let i = 0;
-
-    const interval = setInterval(() => {
-      runButton.textContent = steps[i];
-      i++;
-
-      if (i === steps.length) {
-        clearInterval(interval);
-
-        setTimeout(() => {
-          runButton.disabled = false;
-          runButton.textContent = "🚀 Run AI Automation";
-        }, 1500);
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
       }
-    }, 1000);
+    });
   });
+
+
+  // Scroll Animation
+  const animatedElements = document.querySelectorAll(
+    ".card, .feature, .service, .section"
+  );
+
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        }
+      });
+    },
+    {
+      threshold: 0.15
+    }
+  );
+
+  animatedElements.forEach(element => {
+    observer.observe(element);
+  });
+
+
+  // Back To Top Button
+  const backToTop = document.createElement("button");
+
+  backToTop.innerHTML = "↑";
+  backToTop.setAttribute("aria-label", "Back to top");
+
+  backToTop.style.position = "fixed";
+  backToTop.style.bottom = "25px";
+  backToTop.style.right = "25px";
+  backToTop.style.width = "45px";
+  backToTop.style.height = "45px";
+  backToTop.style.borderRadius = "50%";
+  backToTop.style.border = "none";
+  backToTop.style.cursor = "pointer";
+  backToTop.style.display = "none";
+  backToTop.style.zIndex = "9999";
+
+  document.body.appendChild(backToTop);
+
+
+  // Show / Hide Back To Top
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+      backToTop.style.display = "block";
+    } else {
+      backToTop.style.display = "none";
+    }
+  });
+
+
+  // Back To Top Action
+  backToTop.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+
 });
