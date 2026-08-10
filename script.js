@@ -4,6 +4,10 @@
   const status = document.getElementById("workflowStatus");
   const progress = document.getElementById("progressBar");
 
+  const name = document.getElementById("inputName").value || "John Davis";
+  const business = document.getElementById("inputBusiness").value || "Tech Solutions Inc.";
+  const email = document.getElementById("inputEmail").value || "john@techsolutions.com";
+
   const steps = [
     document.getElementById("step1"),
     document.getElementById("step2"),
@@ -11,128 +15,98 @@
     document.getElementById("step4")
   ];
 
-  const successBox = document.getElementById("successBox");
-
-  // Reset
-  steps.forEach(step => {
-    step.classList.remove("active", "done");
-
-    const small = step.querySelector("small");
-    const check = step.querySelector(".check");
-
-    small.textContent = "Waiting...";
-    check.textContent = "○";
-  });
-
-  successBox.style.display = "none";
-
   button.disabled = true;
-  button.textContent = "⚡ Running AI Automation...";
-
   status.textContent = "Running";
   progress.style.width = "0%";
 
-  // Lead data
+  steps.forEach(step => {
+    step.classList.remove("active", "done");
+    step.querySelector("small").textContent = "Waiting...";
+    step.querySelector(".check").textContent = "○";
+  });
+
+  document.getElementById("successBox").style.display = "none";
+
   setTimeout(() => {
 
-    const lead = {
-      name: "John Davis",
-      business: "Tech Solutions Inc.",
-      email: "john@techsolutions.com",
-      score: 92
-    };
+    document.getElementById("leadAvatar").textContent =
+      name.substring(0, 2).toUpperCase();
 
-    document.getElementById("leadAvatar").textContent = "JD";
-    document.getElementById("leadName").textContent = lead.name;
-    document.getElementById("leadBusiness").textContent = lead.business;
-    document.getElementById("leadEmail").textContent = lead.email;
-    document.getElementById("leadScore").textContent = lead.score;
+    document.getElementById("leadName").textContent = name;
+    document.getElementById("leadBusiness").textContent = business;
+    document.getElementById("leadEmail").textContent = email;
 
     document.getElementById("leadsCount").textContent = "1";
 
-    runStep(0, "Lead captured", 25);
+    completeStep(0, "Lead captured ✓", 25);
 
-  }, 700);
+  }, 500);
 
 
-  function runStep(index, message, percentage) {
-
-    if (index > 0) {
-      steps[index - 1].classList.remove("active");
-      steps[index - 1].classList.add("done");
-
-      steps[index - 1]
-        .querySelector(".check")
-        .textContent = "✓";
-    }
-
-    if (index >= steps.length) {
-      completeAutomation();
-      return;
-    }
+  function completeStep(index, text, percent) {
 
     const step = steps[index];
 
     step.classList.add("active");
+    step.querySelector("small").textContent = text;
+    step.querySelector(".check").textContent = "✓";
 
-    step.querySelector("small").textContent = message;
-
-    progress.style.width = percentage + "%";
+    progress.style.width = percent + "%";
 
     setTimeout(() => {
 
+      step.classList.remove("active");
+      step.classList.add("done");
+
       if (index === 0) {
-        runStep(1, "AI score generated: 92/100", 50);
-      }
 
-      else if (index === 1) {
+        completeStep(
+          1,
+          "AI Score: 92/100 ✓",
+          50
+        );
+
+      } else if (index === 1) {
+
+        document.getElementById("leadScore").textContent = "92";
         document.getElementById("qualifiedCount").textContent = "1";
-        runStep(2, "Personalized message generated", 75);
-      }
 
-      else if (index === 2) {
+        completeStep(
+          2,
+          "Personalized follow-up generated ✓",
+          75
+        );
+
+      } else if (index === 2) {
 
         document.getElementById("messageBox").innerHTML = `
           <span>🤖</span>
           <p>
-            Hi John, thanks for your interest.
+            Hi ${name}, thanks for your interest.
             Our AI automation solution can help
-            streamline your business workflow.
+            streamline ${business}.
             Would you like to see a quick demo?
           </p>
         `;
 
-        runStep(3, "CRM record updated", 100);
-      }
+        completeStep(
+          3,
+          "CRM record updated ✓",
+          100
+        );
 
-      else {
-        completeAutomation();
+      } else {
+
+        status.textContent = "Completed";
+
+        document.getElementById("automationCount").textContent = "1";
+
+        document.getElementById("successBox").style.display = "flex";
+
+        button.disabled = false;
+        button.textContent = "🚀 Run AI Automation";
       }
 
     }, 1200);
   }
-
-
-  function completeAutomation() {
-
-    steps[3].classList.remove("active");
-    steps[3].classList.add("done");
-
-    steps[3]
-      .querySelector(".check")
-      .textContent = "✓";
-
-    progress.style.width = "100%";
-
-    status.textContent = "Completed";
-
-    document.getElementById("automationCount").textContent = "1";
-
-    button.disabled = false;
-    button.textContent = "🚀 Run AI Automation";
-
-    successBox.style.display = "flex";
-
-  }
-
- }
+     }
